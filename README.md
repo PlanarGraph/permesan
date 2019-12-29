@@ -14,4 +14,4 @@ let mut perms = Permesan::new(v);
 ```
 
 # Limitations
-Currently, Permesan only works on collections that can be cloned.
+Currently, Permesan only works on collections of items that can be cloned.
