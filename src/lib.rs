@@ -127,16 +127,19 @@ mod test {
     }
 
     #[test]
-    fn hashmap_test() {
-        let mut hm = HashMap::new();
+    fn collect_vector() {
+        let v = vec![1, 2, 3];
+        let perms: Vec<_> = Permesan::new(v).collect();
 
-        hm.insert(1, 1);
-        hm.insert(2, 2);
-        hm.insert(3, 3);
+        let sol = vec![
+            vec![1, 2, 3],
+            vec![2, 1, 3],
+            vec![3, 1, 2],
+            vec![1, 3, 2],
+            vec![2, 3, 1],
+            vec![3, 2, 1],
+        ];
 
-        let mut v = Permesan::new(hm);
-        assert_eq!(v.next(), Some(vec![(1, 1), (2, 2), (3, 3)]));
-        assert_eq!(v.next(), Some(vec![(2, 2), (1, 1), (3, 3)]));
-        assert_eq!(v.next(), Some(vec![(3, 3), (1, 1), (2, 2)]));
+        assert_eq!(perms, sol);
     }
 }
