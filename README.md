@@ -1,5 +1,5 @@
 # Permesan
-A simple way to generate permutations from a rust collection.
+A simple way to generate permutations from a rust collection using [Heap's algorithm](https://en.wikipedia.org/wiki/Heap's_algorithm).
 
 # Getting Started
 To use `Permesan`, simply create a new `Permesan` iterator from any collection that implements the `IntoIterator` trait.
