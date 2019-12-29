@@ -74,6 +74,16 @@ impl<T: Clone> Iterator for Permesan<T> {
 #[cfg(test)]
 mod test {
     use super::Permesan;
+    use std::collections::HashMap;
+
+    #[test]
+    fn empty_vector() {
+        let empty: Vec<i32> = Vec::new();
+        let mut v = Permesan::new(empty);
+
+        assert_eq!(v.next(), Some(vec![]));
+        assert_eq!(v.next(), None);
+    }
 
     #[test]
     fn basic() {
@@ -87,6 +97,7 @@ mod test {
     #[test]
     fn advanced() {
         let mut v = Permesan::new(vec![1, 2, 3, 4]);
+
         assert_eq!(v.next(), Some(vec![1, 2, 3, 4]));
         assert_eq!(v.next(), Some(vec![2, 1, 3, 4]));
         assert_eq!(v.next(), Some(vec![3, 1, 2, 4]));
@@ -113,5 +124,19 @@ mod test {
         assert_eq!(v.next(), Some(vec![2, 3, 4, 1]));
         assert_eq!(v.next(), None);
         assert_eq!(v.next(), None);
+    }
+
+    #[test]
+    fn hashmap_test() {
+        let mut hm = HashMap::new();
+
+        hm.insert(1, 1);
+        hm.insert(2, 2);
+        hm.insert(3, 3);
+
+        let mut v = Permesan::new(hm);
+        assert_eq!(v.next(), Some(vec![(1, 1), (2, 2), (3, 3)]));
+        assert_eq!(v.next(), Some(vec![(2, 2), (1, 1), (3, 3)]));
+        assert_eq!(v.next(), Some(vec![(3, 3), (1, 1), (2, 2)]));
     }
 }
